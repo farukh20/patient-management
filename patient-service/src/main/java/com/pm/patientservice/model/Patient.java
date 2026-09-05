@@ -3,6 +3,7 @@ package com.pm.patientservice.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Patient {
 
     @Id
