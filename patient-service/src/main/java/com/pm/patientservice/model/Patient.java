@@ -35,5 +35,4 @@ public class Patient {
     @NonNull
     private LocalDate registerDate;
 
-
 }
