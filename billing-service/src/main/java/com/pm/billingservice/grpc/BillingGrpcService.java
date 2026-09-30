@@ -13,7 +13,7 @@ public class BillingGrpcService extends BillingServiceGrpc.BillingServiceImplBas
     @Override
     public void createBillingAccount(billing.BillingRequest billingRequest, StreamObserver<billing.BillingResponse> responseObserver){
 
-        log.info("createBillingAccount request received {}", billingRequest.toString());
+        log.info("createBillingAccount request recevied {}", billingRequest.toString());
 
         //Business logic - e.g save to db , performs calculation etc
 
