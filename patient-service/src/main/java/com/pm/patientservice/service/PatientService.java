@@ -4,13 +4,12 @@ import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
 import com.pm.patientservice.exception.EmailAlreadyExistsException;
 import com.pm.patientservice.exception.PatientNotFoundException;
+import com.pm.patientservice.grpc.BillingServiceGrpcClient;
 import com.pm.patientservice.mapper.PatientMapper;
 import com.pm.patientservice.model.Patient;
 import com.pm.patientservice.repository.PatientRepository;
-import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
@@ -23,6 +22,9 @@ public class PatientService {
     //DI
     @Autowired
     private PatientRepository patientRepository;
+
+    @Autowired
+    private BillingServiceGrpcClient billingServiceGrpcClient;
 
     /*
       //OR DI
@@ -43,6 +45,8 @@ public class PatientService {
         }
 
         Patient newPatient=patientRepository.save(PatientMapper.toModel(patientRequestDTO));
+
+        billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(), newPatient.getName(), newPatient.getEmail());
 
         return PatientMapper.toDTO(newPatient);
     }
